@@ -1,4 +1,5 @@
 from utils.arrs import get, my_slice
+from utils.dicts import get_val
 import pytest
 
 
@@ -28,3 +29,16 @@ class TestArrs:
     )
     def test_my_slice(self, array, start_point, end_point, res_slice):
         assert my_slice(array, start_point, end_point) == res_slice
+
+
+class TestDicts:
+    @pytest.mark.parametrize(
+        'collection, key, default, value',
+        [
+            ({'a': 1, 'b': 2, 'c': 3}, 'c', 'git', 3),
+            ({'a': 1, 'b': 2, 'c': 3}, None, 'git', 'git'),
+            ({'a': 1, 'b': 2, 'c': 3}, 'd', 'git', 'git')
+        ]
+    )
+    def test_get_val(self, collection, key, default, value):
+        assert get_val(collection, key, default) == value
